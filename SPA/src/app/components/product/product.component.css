@@ -1,0 +1,13 @@
+.sticky-top {
+    top: 80px;
+}
+
+.nav-link {
+    padding: 0;
+    color: black;
+}
+
+.nav-link:hover {
+    transform: scale(.9);
+    transition: .5s;
+}

@@ -1,0 +1,13 @@
+<div class="card mb-3" *ngIf="product && product.imageUrl">
+  <img class="card-img-top" [src]="product.imageUrl">
+  <div class="card-body">
+      <h5 class="card-title">{{product.name}}</h5>
+      <p class="card-text">
+          {{product.price | currency:'USD'}}
+          <ng-container *ngIf="showDescription">
+            <br>
+            {{product.description | summary}}
+          </ng-container>
+      </p>
+  </div>
+</div>

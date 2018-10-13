@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="media" *ngIf="product$ | async as product">
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-12 col-12 justify-content-center d-flex">
+        <img class="mb-4" [src]="product.imageUrl">
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-12 col-12">
+        <div class="media-body">
+          <h5 class="mt-0">{{product.name}}</h5>
+          <p>{{product.price | currency:'USD'}}</p>
+          <p>{{product.description}}</p>
+
+          <ng-container *ngIf="product.category && product.category.additionalFields && product.category.additionalFields.length > 0">
+            <h6 class="text-center">Additional Info</h6>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngFor="let field of product.category.additionalFields">
+                {{field.name}}: {{field.fieldValue.value}}
+              </li>
+            </ul>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

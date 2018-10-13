@@ -1,0 +1,47 @@
+<div class="container">
+    <ng-container *ngIf="!isLoading; else loading">
+      <form #form="ngForm" (ngSubmit)="submit()">
+        <div class="row">
+
+          <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+            <h4 class="mb-3">Category</h4>
+  
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Name" name="name" [(ngModel)]="category.name" required #name="ngModel">
+              <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+                <div *ngIf="name.errors.required">Name is required.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+            <h4 class="mb-3">Additional Fields</h4>
+    
+            <button class="btn btn-outline-primary mb-3 d-block" type="button" (click)="addField()">Add Field</button>
+        
+            <div class="form-group" *ngFor="let field of category.additionalFields; index as i">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Field name" name="field_{{i}}" required #f="ngModel" [(ngModel)]="field.name">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-info" type="button" (click)="removeField(i)">Remove</button>
+                </div>
+              </div>
+              <div class="alert alert-danger" *ngIf="f.touched && f.invalid">
+                <div *ngIf="f.errors.required">Field name is required.</div>
+              </div>
+            </div>
+
+            <button class="btn btn-outline-primary mr-2" type="submit" [disabled]="form.invalid">Save</button>
+            <button class="btn btn-outline-danger mr-2" type="button" *ngIf="category.id" (click)="deleteCategory()">Delete</button>
+            <button class="btn btn-outline-danger" type="button" *ngIf="category.id" (click)="deleteCategoryWithProducts()">Delete with Products</button>
+          </div>    
+        </div>  
+          
+        </form>
+    </ng-container>
+
+    <ng-template #loading>
+      <p class="d-flex justify-content-center">Loading...</p>
+    </ng-template>
+    
+  </div>

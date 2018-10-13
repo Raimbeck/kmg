@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-12 col-12">
+      <div class="sticky-top">
+        <ul class="list-group">
+          <a routerLink="/products" class="list-group-item list-group-item-action" [class.active]="!routeCategory">All Products</a>
+
+          <a routerLink="/products" [queryParams]="{category: category.name}" class="list-group-item list-group-item-action" *ngFor="let category of categories$ | async"
+            [class.active]="category.name == routeCategory">
+            {{category.name}}
+          </a>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="col-lg-9 col-md-8 col-sm-12 col-12">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-12" *ngFor="let product of filteredProducts">
+          <a routerLink="/products/{{product.id}}" class="nav-link">
+            <product-card [product]="product"></product-card>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
